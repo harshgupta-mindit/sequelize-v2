@@ -1,5 +1,6 @@
 const db = require('../models/index');
 const Product = db.products;
+const Review = db.reviews;
 
 const AddProduct = async (req, res) => {
     const data = {
@@ -31,8 +32,36 @@ const getProduct = async (req, res) => {
 }
 
 
+const addProductInBulk = async (req, res) => {
+    await Product.bulkCreate().then((data)=> {
+        res.status(200).json(data);
+        console.log("Bulk product added success !!!");
+    })
+    .catch((err)=> {
+        console.log("Bro an error occured : ", err)
+    })
+}
+
+
+const getProductWithReviews = async (req, res) => {
+    const data = await Product.findAll({
+        includes: [{
+            model: Review,
+            as: 'review'
+        }],
+        where: {
+            product_id: 12
+        }
+    })
+
+    res.status(200).json(data);
+}
+
+
 
 module.exports = {
     AddProduct,
-    getProduct
+    getProduct,
+    getProductWithReviews,
+    addProductInBulk
 }

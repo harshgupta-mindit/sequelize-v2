@@ -6,6 +6,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         reviewPoints: {
             type: DataTypes.INTEGER
+        },
+        product_id: {
+            type: DataTypes.INTEGER
         }
     }
     )
