@@ -36,17 +36,6 @@ db.sequelize = sequelize;
 db.products = require('./productModel.js')(sequelize, DataTypes)
 db.reviews = require('./reviewModel.js')(sequelize, DataTypes)
 
-
-// One to Many Relation with Product and Reviews
-db.products.hasMany(db.reviews, {
-    foreignKey: 'product_id',
-    as: 'review'
-})
-db.reviews.belongsTo(db.products, {
-    foreignKey: 'product_id',
-    as: 'product'
-})
-
 db.sequelize.sync({force: false}).then(()=> {
     console.log('Yes, Resync is done!!!');
 })

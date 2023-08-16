@@ -4,7 +4,8 @@ const Review = db.reviews;
 const AddReview = async (req, res) => {
     const data = {
         reviewMessage: req.body.reviewMessage,
-        reviewPoints: req.body.reviewPoints
+        reviewPoints: req.body.reviewPoints,
+        product_id: req.body.product_id
     }
     await Review.create(data).then(()=> {
         console.log("Data Added success !!!");
